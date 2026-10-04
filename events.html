@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفعاليات</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<script>
+function openEventModal(title, date, location, desc) {
+    // إنشاء المودال
+    const modal = document.createElement('div');
+    modal.className = 'event-modal';
+    modal.style.cssText = `
+        position:fixed; inset:0; background:rgba(0,0,0,.7);
+        display:flex; align-items:center; justify-content:center; z-index:9999;
+    `;
+
+    modal.innerHTML = `
+        <div style="background:#fff; margin:auto; padding:25px; width:90%; max-width:400px; border-radius:10px; direction:rtl; position:relative">
+            <span style="position:absolute; left:10px; top:5px; font-size:24px; cursor:pointer" onclick="this.closest('.event-modal').remove()">&times;</span>
+
+            <h3>${title}</h3>
+            <p><strong>التاريخ:</strong> ${date}</p>
+            <p><strong>الموقع:</strong> ${location}</p>
+            <p>${desc}</p>
+
+            <form id="eventForm" style="display:flex; flex-direction:column; gap:10px; margin-top:15px">
+                <input type="text" name="user_name" placeholder="الاسم الكامل" required />
+                <input type="email" name="email" placeholder="البريد الإلكتروني" required />
+                <input type="tel" name="phone" placeholder="رقم الجوال" required />
+                <input type="number" name="tickets" min="1" placeholder="عدد التذاكر" required />
+                <button type="submit" style="padding:8px 0; background:#4caf50; color:#fff; border:none; border-radius:4px">احجز الآن</button>
+                <button type="button" style="padding:8px 0; background:#ccc; border:none; border-radius:4px" onclick="this.closest('.event-modal').remove()">إلغاء</button>
+            </form>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // معالج الإرسال
+    modal.querySelector('#eventForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        fd.append('event_title', title);
+
+        fetch('api/book_event.php', {method:'POST', body: fd})
+            .then(r => r.json())
+            .then(d => {
+                if (d.success) {
+                    const notify = document.createElement('div');
+                    notify.innerHTML = `<div style="position:fixed; top:20px; left:50%; transform:translateX(-50%); background:#4caf50; color:#fff; padding:12px 20px; border-radius:6px; z-index:99999">${d.message}</div>`;
+                    document.body.appendChild(notify);
+                    setTimeout(() => notify.remove(), 3000);
+                    modal.remove();
+                } else {
+                    alert('⚠️ ' + d.error);
+                }
+            })
+            .catch(() => alert('⚠️ خطأ في الشبكة'));
+    });
+}
+</script>
+<body>
+    <header>
+        <h1>زُر العلا</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="about.html">عن العلا</a></li>
+                <li><a href="places.html">الأماكن السياحية</a></li>
+                <li><a href="activities.html">الأنشطة</a></li>
+                <li><a href="events.html" class="active">الفعاليات</a></li>
+                <li><a href="plan.html">خطط رحلتك</a></li>
+            </ul>
+        </nav>
+        <button id="toggleDarkMode">🌙 الوضع الليلي</button>
+    </header>
+
+    <section class="events-intro">
+        <h2>فعاليات العلا: تجارب ثقافية وفنية استثنائية</h2>
+        <p>تقدم العلا طوال العام سلسلة من الفعاليات الثقافية والفنية والترفيهية التي تجمع بين الأصالة والحداثة. من المهرجانات الموسيقية العالمية إلى المعارض الفنية الراقية، اكتشف الأحداث التي تجعل من العلا وجهة ثقافية رائدة في المنطقة.</p>
+    </section>
+
+    <section class="featured-events">
+        <h3>الفعاليات القادمة</h3>
+        
+        <div class="event-card">
+            <div class="event-image">
+                <img src="assets/images/Winter_Tantora.png" alt="شتاء طنطورة">
+            </div>
+            <div class="event-info">
+                <h4>مهرجان شتاء طنطورة</h4>
+                <div class="event-details">
+                    <span>🗓️ 21 ديسمبر 2023 - 21 فبراير 2024</span>
+                    <span>📍 قاعة مرايا والمواقع التاريخية</span>
+                </div>
+                <p>أشهر مهرجان موسيقي في المنطقة، يستضيف نجوماً عالميين في حفلات موسيقية تحت النجوم وفي قاعة مرايا الشهيرة. يتضمن المهرجان أيضاً عروضاً ضوئية على المواقع الأثرية، ومعارض فنية، وفعاليات ثقافية متنوعة.</p>
+
+<a href="javascript:void(0)"
+   class="event-btn"
+   onclick="openEventModal(
+      'مهرجان شتاء طنطورة',
+      '21 ديسمبر 2023 - 21 فبراير 2024',
+      'قاعة مرايا والمواقع التاريخية',
+      'أشهر مهرجان موسيقي في المنطقة، يستضيف نجوماً عالميين...'
+   )">
+   احجز تذكرتك
+</a>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-image">
+                <img src="assets/images/Nature_Season.jpg" alt="فعاليات العلا">
+            </div>
+            <div class="event-info">
+                <h4>فعاليات العلا: موسم الطبيعة</h4>
+                <div class="event-details">
+                    <span>🗓️ 1 مارس - 30 أبريل 2024</span>
+                    <span>📍 واحات العلا ووادي الفن</span>
+                </div>
+                <p>موسم مخصص لعشاق الطبيعة، يتضمن جولات نباتية في الواحات، وورش عمل للزراعة المستدامة، وعروضاً للطيور الجارحة، ومسارات لركوب الدراجات، وجلسات يوغا في أحضان الطبيعة، بالإضافة إلى سوق للمنتجات العضوية المحلية.</p>
+<a href="javascript:void(0)"
+   class="event-btn"
+   onclick="openEventModal(
+      'فعاليات العلا: موسم الطبيعة',
+      '1 مارس - 30 أبريل 2024',
+      'واحات العلا ووادي الفن',
+      'موسم مخصص لعشاق الطبيعة، يتضمن جولات نباتية...'
+   )">
+   احجز تذكرتك
+</a>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-image">
+                <img src="assets/images/arts.jpeg" alt="مهرجان الفنون">
+            </div>
+            <div class="event-info">
+                <h4>مهرجان العلا للفنون البصرية</h4>
+                <div class="event-details">
+                    <span>🗓️ 15 مايو - 15 يوليو 2024</span>
+                    <span>📍 وادي الفن والمتاحف</span>
+                </div>
+                <p>أكبر تجمع فني في المنطقة، يضم أعمالاً لفنانين محليين ودوليين معروضة في الهواء الطلق وفي صالات العرض. يتضمن المهرجان ورش عمل فنية، وجولات مع الفنانين، وعروضاً أدائية، ومسابقات فنية للهواة والمحترفين.</p>
+<a href="javascript:void(0)"
+   class="event-btn"
+   onclick="openEventModal(
+      'مهرجان العلا للفنون البصرية',
+      '15 مايو - 15 يوليو 2024',
+      'وادي الفن والمتاحف',
+      'أكبر تجمع فني في المنطقة، يضم أعمالاً لفنانين...'
+   )">
+   احجز تذكرتك
+</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="events-calendar">
+        <h3>تقويم الفعاليات</h3>
+        <div class="calendar">
+            <div class="calendar-header">
+                <button id="prevMonth">‹</button>
+                <h4 id="currentMonth">ديسمبر 2023</h4>
+                <button id="nextMonth">›</button>
+            </div>
+            <div class="calendar-grid">
+                <div class="day-name">الأحد</div>
+                <div class="day-name">الاثنين</div>
+                <div class="day-name">الثلاثاء</div>
+                <div class="day-name">الأربعاء</div>
+                <div class="day-name">الخميس</div>
+                <div class="day-name">الجمعة</div>
+                <div class="day-name">السبت</div>
+                
+                <!-- Calendar days will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">عن العلا</a></li>
+                    <li><a href="places.html">الأماكن السياحية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>معلومات الاتصال</h3>
+                <p>هاتف: +966 14 884 0000</p>
+                <p>البريد الإلكتروني: info@alula.sa</p>
+            </div>
+            <!-- <div class="footer-section">
+                <h3>تابعنا</h3>
+                <div class="social-icons">
+                    <a href="#"><span>ف</span></a>
+                    <a href="#"><span>ت</span></a>
+                    <a href="#"><span>ي</span></a>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="copyright">
+            <p>© 2023 نظام الموقع الإلكتروني للعلا. جميع الحقوق محفوظة.</p>
+        </div> -->
+    </footer>
+
+    <script>
+// Function to open event details modal
+function openEventModal(eventTitle, eventDate, eventLocation, eventDescription) {
+    const modal = document.createElement('div');
+    modal.className = 'event-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>${eventTitle}</h3>
+            <div class="event-details">
+                <span><strong>التاريخ:</strong> ${eventDate}</span>
+                <span><strong>الموقع:</strong> ${eventLocation}</span>
+            </div>
+            <p>${eventDescription}</p>
+            <a href="javascript:void(0)" class="event-btn"
+   onclick="openEventModal('مهرجان شتاء طنطورة')">احجز تذكرتك</a>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        modal.remove();
+    });
+}
+
+// Add event listeners to calendar days
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarDays = document.querySelectorAll('.calendar-day:not(.empty)');
+    calendarDays.forEach(day => {
+        day.addEventListener('click', function() {
+            const dayNumber = this.textContent;
+            const currentMonth = document.getElementById('currentMonth').textContent;
+            
+            // Sample event data
+            const eventTitle = `فعالية خاصة في اليوم ${dayNumber}`;
+            const eventDate = `${dayNumber} ${currentMonth}`;
+            const eventLocation = "قاعة مرايا، العلا";
+            const eventDescription = "استمتع بأمسية موسيقية رائعة تحت النجوم مع أشهر الفنانين العالميين في جو تاريخي لا ينسى في قاعة مرايا الشهيرة بالعلا.";
+            
+            openEventModal(eventTitle, eventDate, eventLocation, eventDescription);
+        });
+    });
+});
+</script>
+
+<style>
+/* Event Modal Styles */
+.event-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+/* Dark Mode Modal */
+body.dark-mode .modal-content {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-mode .close-modal {
+    color: #aaa;
+}
+
+body.dark-mode .close-modal:hover {
+    color: #fff;
+}
+</style>
+</body>
+</html>

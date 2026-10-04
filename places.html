@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأماكن السياحية</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>زُر العلا</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="about.html">عن العلا</a></li>
+                <li><a href="places.html" class="active">الأماكن السياحية</a></li>
+                <li><a href="activities.html">الأنشطة</a></li>
+                <li><a href="events.html">الفعاليات</a></li>
+                <li><a href="plan.html">خطط رحلتك</a></li>
+            </ul>
+        </nav>
+        <button id="toggleDarkMode">🌙 الوضع الليلي</button>
+    </header>
+
+    <section class="places-intro">
+        <h2>اكتشف كنوز العلا السياحية</h2>
+        <p>تضم العلا مجموعة متنوعة من المعالم السياحية التي تجمع بين التاريخ العريق والطبيعة الخلابة والحداثة المتميزة. من المواقع الأثرية التي تعود لآلاف السنين إلى التكوينات الصخرية الفريدة والمنشآت الحديثة التي تتناغم مع البيئة المحيطة.</p>
+    </section>
+
+    <section class="places-grid">
+        <div class="place-card">
+            <img src="assets/images/hegra.jpg" alt="مدائن صالح">
+            <div class="place-info">
+                <h3>مدائن صالح (الحِجر)</h3>
+                <p>أول موقع سعودي يدرج في قائمة اليونسكو للتراث العالمي، يضم أكثر من 100 مقبرة نبطية منحوتة في الصخور تعود للقرن الأول قبل الميلاد. تتميز بواجهاتها المعمارية الفريدة التي تعكس براعة الأنباط في النحت والعمارة.</p>
+                <a href="index.html#place1" class="place-btn">اكتشف المزيد</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="assets/images/old-town.jpg" alt="البلدة القديمة">
+            <div class="place-info">
+                <h3>البلدة القديمة</h3>
+                <p>تقع في قلب العلا وتضم أكثر من 900 منزل طيني وحجري، و400 متجر، و5 ساحات عامة. كانت مأهولة حتى ثمانينيات القرن الماضي، وتقدم لمحة عن الحياة التقليدية في المنطقة مع أزقتها الضيقة ومسجدها التاريخي.</p>
+                <a href="index.html#place2" class="place-btn">اكتشف المزيد</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="assets/images/elephant-rock.jpg" alt="صخرة الفيل">
+            <div class="place-info">
+                <h3>صخرة الفيل</h3>
+                <p>تكوين صخري طبيعي يشبه فيلاً ضخماً يبلغ ارتفاعه 52 متراً، تشكل عبر ملايين السنين بفعل عوامل التعرية. تحيط بها كثبان رملية ذهبية وتضاء ليلاً بمشاهد ضوئية ساحرة، مما يجعلها مكاناً مثالياً للتصوير والاسترخاء.</p>
+                <a href="index.html#place3" class="place-btn">اكتشف المزيد</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="assets/images/maraya.jpg" alt="قاعة مرايا">
+            <div class="place-info">
+                <h3>قاعة مرايا</h3>
+                <p>أكبر مبنى مغطى بالمرايا في العالم، صممته شركة "فلويد" الإيطالية. يضم قاعة للحفلات الموسيقية تتسع لـ 500 شخص، ويمثل تحفة معمارية تتناغم مع البيئة المحيطة حيث تعكس مراياه المناظر الطبيعية الخلابة.</p>
+                <a href="index.html#place4" class="place-btn">اكتشف المزيد</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="assets/images/dadan.webp" alt="مملكة دادان">
+            <div class="place-info">
+                <h3>موقع دادان</h3>
+                <p>عاصمة مملكتي دادان ولحيان التي ازدهرت بين القرنين الثامن والسادس قبل الميلاد. يضم الموقع بقايا قصور ومعابد ومقابر ملكية منحوتة في الجبال، بالإضافة إلى نقوش وكتابات تعكس تاريخ المنطقة الغني.</p>
+                <a href="index.html#place5" class="place-btn">اكتشف المزيد</a>
+            </div>
+        </div>
+
+        <div class="place-card">
+            <img src="assets/images/ikhmah.jpg" alt="جبل عكمة">
+            <div class="place-info">
+                <h3>جبل عكمة</h3>
+                <p>يُعرف بمكتبة العلا المفتوحة، حيث يحتوي على أكثر من 450 نقشاً ورسوماً تعود لحضارات دادان ولحيان والأنباط. تمثل هذه النقوش سجلاً تاريخياً هاماً للحياة الدينية والاقتصادية والاجتماعية في المنطقة عبر العصور.</p>
+                <a href="index.html#place6" class="place-btn">اكتشف المزيد</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="about.html">عن العلا</a></li>
+                    <li><a href="places.html">الأماكن السياحية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>معلومات الاتصال</h3>
+                <p>هاتف: +966 14 884 0000</p>
+                <p>البريد الإلكتروني: info@alula.sa</p>
+            </div>
+            <!-- <div class="footer-section">
+                <h3>تابعنا</h3>
+                <div class="social-icons">
+                    <a href="#"><span>ف</span></a>
+                    <a href="#"><span>ت</span></a>
+                    <a href="#"><span>ي</span></a>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="copyright">
+            <p>© 2023 نظام الموقع الإلكتروني للعلا. جميع الحقوق محفوظة.</p>
+        </div> -->
+    </footer>
+</body>
+</html>
